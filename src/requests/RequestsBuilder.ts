@@ -22,7 +22,7 @@ export class RequestsBuilder {
         if (!this.ticker){
             this.ticker = setInterval(() => {
                 // console.log("tick", this.getTime())
-                this.processTasks()
+                this.processTasks().then()
             }, 1);
         }
     }
@@ -34,34 +34,12 @@ export class RequestsBuilder {
         }
     }
 
-    getTime = () => {
-        const time = Date.now() - this.debugProfilerTime
-        this.debugProfilerTime = Date.now()
-        return time
-    }
-
-
-
-    constructor() {
-        // console.log("create builder for request", this.getTime());
-
-    }
-
-
-    getTaskResult(taskId: number): string | undefined {
-        const task = this.completedTasks.find(task => task.id === taskId)
-        if (task?.status !== "DONE") {
-            return undefined
-        }
-        return task.result
-    }
 
     private sleep(ms: number) {
         return new Promise<void>(resolve => setTimeout(resolve, ms));
     }
 
     async addTaskRequest(task: TaskRequest) {
-        // console.log(`add task request ${task.requested_id}`, this.getTime());
         this.tasks.push(task)
         this.lastPushTime = Date.now()
     }

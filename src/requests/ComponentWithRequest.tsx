@@ -1,4 +1,4 @@
-import {getRequestsBuilder, RequestsBuilder} from "@/requests/RequestsBuilder";
+import {getRequestsBuilder} from "@/requests/RequestsBuilder";
 import crypto from "crypto";
 
 export default async function ComponentWithRequest(){
